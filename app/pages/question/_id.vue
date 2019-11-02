@@ -8,9 +8,7 @@
               <strong>{{ question.title }}</strong>
               <br />
               <small>{{ question.user && question.user.name }}</small>
-              <small>{{
-                this.$moment(question.createdAt).format('YYYY.MM.DD - h:mm a')
-              }}</small>
+              <small>{{ this.$moment(question.createdAt).format('YYYY.MM.DD - h:mm a') }}</small>
             </p>
           </div>
         </div>
@@ -24,12 +22,7 @@
         <div class="media-content">
           <div class="content">
             <!-- ここに回答が入る -->
-            <AnswerList
-              v-for="(a, index) in allAnswers"
-              :key="index"
-              :answer="a"
-              :question-id="question.id"
-            />
+            <AnswerList v-for="(a, index) in allAnswers" :key="index" :answer="a" :question-id="question.id" />
           </div>
         </div>
       </article>
@@ -39,11 +32,7 @@
       <div v-if="isLogin" class="media-content">
         <div class="field">
           <p class="control">
-            <textarea
-              v-model="answer"
-              class="textarea"
-              placeholder="回答を入力してください！"
-            ></textarea>
+            <textarea v-model="answer" class="textarea" placeholder="回答を入力してください！"></textarea>
           </p>
         </div>
         <div class="field">

@@ -3,9 +3,7 @@
     <strong>{{ answer.title }}</strong>
     <br />
     <small>{{ answer.user && answer.user.name }}</small>
-    <small>{{
-      this.$moment(answer.createdAt).format('YYYY.MM.DD - h:mm a')
-    }}</small>
+    <small>{{ this.$moment(answer.createdAt).format('YYYY.MM.DD - h:mm a') }}</small>
     <!-- ここに編集・削除ボタンが入る -->
     <span v-if="isLoginUser" class="level-left buttons">
       <a class="button is-small is-rounded" @click="toggleEditModal">編集</a>
@@ -32,22 +30,14 @@
           </button>
         </footer>
       </div>
-      <button
-        class="modal-close is-large"
-        aria-label="close"
-        @click="toggleRemoveModal"
-      ></button>
+      <button class="modal-close is-large" aria-label="close" @click="toggleRemoveModal"></button>
     </div>
     <div :class="`modal ${editModalActive ? 'is-active' : ''}`">
       <div class="modal-background" @click="toggleEditModal"></div>
       <div class="modal-card">
         <section class="modal-card-body">
           <p>質問の編集</p>
-          <textarea
-            v-model="answerTitle"
-            class="textarea"
-            placeholder="回答を編集してください"
-          ></textarea>
+          <textarea v-model="answerTitle" class="textarea" placeholder="回答を編集してください"></textarea>
         </section>
         <footer class="modal-card-foot">
           <button class="button" @click="toggleEditModal">閉じる</button>
@@ -63,11 +53,7 @@
           </button>
         </footer>
       </div>
-      <button
-        class="modal-close is-large"
-        aria-label="close"
-        @click="toggleEditModal"
-      ></button>
+      <button class="modal-close is-large" aria-label="close" @click="toggleEditModal"></button>
     </div>
   </div>
 </template>

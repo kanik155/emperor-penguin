@@ -20,4 +20,5 @@ export default (context, inject) => {
   }
 
   inject('fireApp', fireApp)
+  inject('google_auth_provider', new firebase.auth.GoogleAuthProvider())
 }

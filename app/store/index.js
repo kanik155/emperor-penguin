@@ -24,59 +24,36 @@ export const mutations = {
 }
 
 export const actions = {
-  signUpUser({ commit }, payload) {
+  loginUserWithGoogle({ commit }, payload) {
     commit('setBusy', true)
     commit('clearError')
     let newUser = null
-    // 新規ユーザーの登録(firestoreのauth)
     const db = this.$fireApp.firestore()
     this.$fireApp
       .auth()
-      .createUserWithEmailAndPassword(payload.email, payload.password)
+      .signInWithPopup(this.$google_auth_provider)
       .then((data) => {
         newUser = data.user
-        return data.user
-          .updateProfile({ displayName: payload.displayName })
-          .then(() => {
-            const authUser = {
-              id: data.user.uid,
-              email: data.user.email,
-              name: data.user.displayName
-            }
-            commit('setUser', authUser)
-            commit('setJobDone', true)
-            commit('setBusy', false)
-          })
-      })
-      .then(() => {
-        // ユーザーをデータベースに登録(主にデータ⽤)
-        const userRef = db.collection('users').doc(newUser.uid)
-        return userRef.set({
-          email: payload.email,
-          name: payload.displayName,
-          createdAt: new Date().toISOString()
+        return newUser.updateProfile({ displayName: data.displayName }).then(() => {
+          const authUser = {
+            id: data.user.uid,
+            email: data.user.email,
+            name: data.user.displayName,
+            photoURL: data.user.photoURL
+          }
+          commit('setUser', authUser)
+          commit('setJobDone', true)
+          commit('setBusy', false)
         })
       })
-      .catch((error) => {
-        commit('setBusy', false)
-        commit('setError', error)
-      })
-  },
-  loginUser({ commit }, payload) {
-    commit('setBusy', true)
-    commit('clearError')
-    this.$fireApp
-      .auth()
-      .signInWithEmailAndPassword(payload.email, payload.password)
-      .then((data) => {
-        const authUser = {
-          id: data.user.uid,
-          email: data.user.email,
-          name: data.user.displayName
-        }
-        commit('setUser', authUser)
-        commit('setJobDone', true)
-        commit('setBusy', false)
+      .then(() => {
+        const userRef = db.collection('users').doc(newUser.uid)
+        return userRef.set({
+          email: newUser.email,
+          name: newUser.displayName,
+          photoURL: newUser.photoURL,
+          createdAt: new Date().toISOString()
+        })
       })
       .catch((error) => {
         commit('setBusy', false)

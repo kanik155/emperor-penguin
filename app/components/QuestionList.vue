@@ -12,19 +12,13 @@
         <div class="level-left">
           <p>
             <strong>@{{ question.user.name }}</strong>
-            <small>{{
-              this.$moment(question.createdAt).format('YYYY.MM.DD - h:mm a')
-            }}</small>
+            <small>{{ this.$moment(question.createdAt).format('YYYY.MM.DD - h:mm a') }}</small>
           </p>
         </div>
         <!-- ここに編集・削除ボタンが入る -->
         <div v-if="isQuestionUser" class="level-left buttons">
-          <a class="button is-small is-rounded" @click="toggleEditModal"
-            >編集</a
-          >
-          <a class="button is-small is-rounded" @click="toggleRemoveModal"
-            >削除</a
-          >
+          <a class="button is-small is-rounded" @click="toggleEditModal">編集</a>
+          <a class="button is-small is-rounded" @click="toggleRemoveModal">削除</a>
         </div>
       </nav>
     </div>
@@ -49,22 +43,14 @@
           </button>
         </footer>
       </div>
-      <button
-        class="modal-close is-large"
-        aria-label="close"
-        @click="toggleRemoveModal"
-      ></button>
+      <button class="modal-close is-large" aria-label="close" @click="toggleRemoveModal"></button>
     </div>
     <div :class="`modal ${editModalActive ? 'is-active' : ''}`">
       <div class="modal-background" @click="toggleEditModal"></div>
       <div class="modal-card">
         <section class="modal-card-body">
           <p>質問の編集</p>
-          <textarea
-            v-model="questionTitle"
-            class="textarea"
-            placeholder="質問を入力してください"
-          ></textarea>
+          <textarea v-model="questionTitle" class="textarea" placeholder="質問を入力してください"></textarea>
         </section>
         <footer class="modal-card-foot">
           <button class="button" @click="toggleEditModal">閉じる</button>
@@ -80,11 +66,7 @@
           </button>
         </footer>
       </div>
-      <button
-        class="modal-close is-large"
-        aria-label="close"
-        @click="toggleEditModal"
-      ></button>
+      <button class="modal-close is-large" aria-label="close" @click="toggleEditModal"></button>
     </div>
   </article>
 </template>

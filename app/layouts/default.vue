@@ -35,11 +35,10 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <nuxt-link v-if="!isLogin" class="button is-light" to="/login">ログイン</nuxt-link>
-              <nuxt-link v-else class="button is-light" to="/mypage">{{ userName }}さん</nuxt-link>
-              <nuxt-link class="button is-primary" to="/signup">
-                <strong>アカウント作成</strong>
+              <nuxt-link v-if="!isLogin" class="button is-primary" to="/login">
+                Login
               </nuxt-link>
+              <nuxt-link v-else to="/mypage"><img :src="photoURL"/></nuxt-link>
             </div>
           </div>
         </div>
@@ -63,7 +62,6 @@ import { mapMutations } from 'vuex'
 export default {
   computed: {
     isLogin() {
-      // テンプレート側でログイン状態を判定したいのでcomputedを作成
       const loggedIn = this.$store.getters.loginStatus
       // eslint-disable-next-line no-console
       console.log(loggedIn)
@@ -75,19 +73,20 @@ export default {
       }
     },
     userName() {
-      // storeからのユーザーネーム取得処理
       return this.$store.getters.user ? this.$store.getters.user.name : ''
+    },
+    photoURL() {
+      return this.$store.getters.user ? this.$store.getters.user.photoURL : ''
     }
   },
   created() {
-    // pluginsでinjectしたfirebaseは次のように呼び出せます
-    // onAuthStateChangedでログイン状態を判定できます
     this.$fireApp.auth().onAuthStateChanged((user) => {
       if (user) {
         const authUser = {
           id: user.uid,
           email: user.email,
-          name: user.displayName
+          name: user.displayName,
+          photoURL: user.photoURL
         }
         this.setUser(authUser)
       }

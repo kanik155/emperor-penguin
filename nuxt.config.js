@@ -28,26 +28,15 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '@/plugins/firebase',
-    '@/plugins/vee-validate',
-    '@/plugins/moment',
-    '@/plugins/uniqStr'
-  ],
+  plugins: ['@/plugins/firebase', '@/plugins/vee-validate', '@/plugins/moment', '@/plugins/uniqStr'],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
-  ],
+  buildModules: ['@nuxtjs/eslint-module'],
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma'
-  ],
+  modules: ['@nuxtjs/bulma', 'nuxt-fontawesome'],
   /*
    ** Build configuration
    */
@@ -63,5 +52,20 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  /*
+   ** Font Awesome
+   */
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
   }
 }

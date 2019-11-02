@@ -34,12 +34,19 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
-              <nuxt-link v-if="!isLogin" class="button is-primary" to="/login">
-                Login
-              </nuxt-link>
-              <nuxt-link v-else to="/mypage"><img :src="photoURL"/></nuxt-link>
-            </div>
+            <form @submit.prevent="onLoginWithGoogle">
+              <div class="field">
+                <div class="control">
+                  <button v-if="!isLogin" class="button is-info" :class="{ 'is-loading': busy }" :disabled="busy">
+                    <span class="icon">
+                      <font-awesome-icon :icon="['fab', 'google']" />
+                    </span>
+                    <span>Login With Google</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <nuxt-link to="/mypage"><img :src="photoURL"/></nuxt-link>
           </div>
         </div>
       </div>
@@ -59,7 +66,10 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import apiJobMixin from '@/mixins/apiJobMixin'
+
 export default {
+  mixins: [apiJobMixin],
   computed: {
     isLogin() {
       const loggedIn = this.$store.getters.loginStatus
@@ -95,7 +105,14 @@ export default {
   methods: {
     ...mapMutations({
       setUser: 'setUser'
-    })
+    }),
+    onLoginWithGoogle() {
+      this.$store.dispatch('loginUserWithGoogle')
+    },
+    jobsDone() {
+      this.removeErrors()
+      this.$router.replace('/')
+    }
   }
 }
 </script>

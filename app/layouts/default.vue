@@ -46,7 +46,7 @@
                 </div>
               </div>
             </form>
-            <nuxt-link to="/mypage"><img :src="photoURL"/></nuxt-link>
+            <nuxt-link to="/mypage"><img class="circle" :src="photoURL"/></nuxt-link>
           </div>
         </div>
       </div>
@@ -116,3 +116,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.circle {
+  border-radius: 50%;
+}
+</style>

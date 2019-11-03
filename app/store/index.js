@@ -63,6 +63,16 @@ export const actions = {
   logOut({ commit }) {
     this.$fireApp.auth().signOut()
     commit('setUser', null)
+  },
+  inquiry({ commit }, payload) {
+    commit('setBusy', true)
+    // eslint-disable-next-line no-console
+    console.log(payload.displayName)
+    // eslint-disable-next-line no-console
+    console.log(payload.email)
+    // eslint-disable-next-line no-console
+    console.log(payload.message)
+    commit('setBusy', false)
   }
 }
 

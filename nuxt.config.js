@@ -1,9 +1,8 @@
 export default {
   mode: 'universal',
+
   srcDir: 'app',
-  /*
-   ** Headers of the page
-   */
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -17,32 +16,21 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  /*
-   ** Customize the progress-bar color
-   */
+
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
+
   css: ['~assets/sass/common.scss'],
+
   styleResources: {
     scss: ['@/assets/sass/variable.scss']
   },
-  /*
-   ** Plugins to load before mounting the App
-   */
+
   plugins: ['@/plugins/firebase', '@/plugins/vee-validate', '@/plugins/moment', '@/plugins/uniqStr'],
-  /*
-   ** Nuxt.js dev-modules
-   */
+
   buildModules: ['@nuxtjs/eslint-module'],
-  /*
-   ** Nuxt.js modules
-   */
+
   modules: ['@nuxtjs/style-resources', 'nuxt-fontawesome'],
-  /*
-   ** Build configuration
-   */
+
   build: {
     postcss: {
       preset: {
@@ -51,14 +39,12 @@ export default {
         }
       }
     },
-    /*
-     ** You can extend webpack config here
-     */
+
+    transpile: ['vee-validate/dist/rules'],
+
     extend(config, ctx) {}
   },
-  /*
-   ** Font Awesome
-   */
+
   fontawesome: {
     imports: [
       {

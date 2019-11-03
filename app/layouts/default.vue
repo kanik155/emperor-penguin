@@ -5,7 +5,6 @@
         <a class="navbar-item" href="/">
           <img src="https://bulma.io/images/bulma-logo-white.png" />
         </a>
-
         <a
           role="button"
           class="navbar-burger burger"

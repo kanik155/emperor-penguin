@@ -25,10 +25,10 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">About</a>
             <div class="navbar-dropdown">
-              <nuxt-link class="navbar-item" to="/tos">利用規約</nuxt-link>
-              <nuxt-link class="navbar-item" to="/privacy-policy">プライバシーポリシー</nuxt-link>
+              <nuxt-link class="navbar-item" to="/terms">利用規約</nuxt-link>
+              <nuxt-link class="navbar-item" to="/privacy">プライバシーポリシー</nuxt-link>
               <hr class="navbar-divider" />
-              <nuxt-link class="navbar-item" to="/contact">お問い合わせ</nuxt-link>
+              <nuxt-link class="navbar-item" to="/inquiry">お問い合わせ</nuxt-link>
             </div>
           </div>
         </div>

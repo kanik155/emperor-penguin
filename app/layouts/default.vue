@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="https://bulma.io/images/bulma-logo.png" />
+          <img src="https://bulma.io/images/bulma-logo-white.png" />
         </a>
 
         <a
@@ -21,23 +21,23 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <nuxt-link class="navbar-item" to="/">Mypage</nuxt-link>
-          <nuxt-link class="navbar-item" to="/">Settings</nuxt-link>
+          <nuxt-link class="navbar-item" to="/settings">Settings</nuxt-link>
           <div class="navbar-item has-dropdown is-hoverable">
-            <nuxt-link class="navbar-link" to="/">About</nuxt-link>
+            <a class="navbar-link">About</a>
             <div class="navbar-dropdown">
-              <nuxt-link class="navbar-item" to="/">利用規約</nuxt-link>
-              <nuxt-link class="navbar-item" to="/">プライバシーポリシー</nuxt-link>
+              <nuxt-link class="navbar-item" to="/tos">利用規約</nuxt-link>
+              <nuxt-link class="navbar-item" to="/privacy-policy">プライバシーポリシー</nuxt-link>
               <hr class="navbar-divider" />
-              <nuxt-link class="navbar-item" to="/">お問い合わせ</nuxt-link>
+              <nuxt-link class="navbar-item" to="/contact">お問い合わせ</nuxt-link>
             </div>
           </div>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <form @submit.prevent="onLoginWithGoogle">
+            <form v-if="!isLogin" @submit.prevent="onLoginWithGoogle">
               <div class="field">
                 <div class="control">
-                  <button v-if="!isLogin" class="button is-info" :class="{ 'is-loading': busy }" :disabled="busy">
+                  <button class="button is-light" :class="{ 'is-loading': busy }" :disabled="busy">
                     <span class="icon">
                       <font-awesome-icon :icon="['fab', 'google']" />
                     </span>
@@ -46,7 +46,11 @@
                 </div>
               </div>
             </form>
-            <nuxt-link to="/mypage"><img class="circle" :src="photoURL"/></nuxt-link>
+            <nuxt-link v-else to="/mypage">
+              <figure class="image is-32x32">
+                <img id="login-user-icon" class="is-rounded" :src="photoURL" />
+              </figure>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -73,8 +77,6 @@ export default {
   computed: {
     isLogin() {
       const loggedIn = this.$store.getters.loginStatus
-      // eslint-disable-next-line no-console
-      console.log(loggedIn)
 
       if (loggedIn) {
         return true
@@ -118,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.circle {
-  border-radius: 50%;
+#login-user-icon {
+  max-height: none !important;
 }
 </style>

@@ -28,6 +28,7 @@ const mailTransport = nodemailer.createTransport({
 const adminContents = (data) => {
   return `以下内容でホームページよりお問い合わせを受けました。
 
+--------------------
 お名前：
 ${data.displayName}
 
@@ -36,6 +37,7 @@ ${data.email}
 
 お問合せ内容：
 ${data.message}
+--------------------
 `
 }
 

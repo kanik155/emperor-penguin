@@ -1,3 +1,5 @@
+import * as firebase from 'firebase'
+
 export const state = () => ({
   user: null,
   error: null,
@@ -66,13 +68,17 @@ export const actions = {
   },
   inquiry({ commit }, payload) {
     commit('setBusy', true)
-    // eslint-disable-next-line no-console
-    console.log(payload.displayName)
-    // eslint-disable-next-line no-console
-    console.log(payload.email)
-    // eslint-disable-next-line no-console
-    console.log(payload.message)
-    commit('setBusy', false)
+
+    const mailer = firebase.functions().httpsCallable('sendMail')
+
+    mailer({ displayName: payload.displayName, email: payload.email, message: payload.message })
+      .then(() => {
+        commit('setBusy', false)
+      })
+      .catch((error) => {
+        commit('setBusy', false)
+        commit('setError', error)
+      })
   }
 }
 

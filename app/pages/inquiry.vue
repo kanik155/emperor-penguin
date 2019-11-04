@@ -10,19 +10,23 @@
             <validation-observer v-slot="{ valid }">
               <form @submit.prevent="onSubmmit">
                 <div class="field">
-                  <label class="label">お名前</label>
-                  <div class="control">
+                  <div class="control-material">
                     <validation-provider v-slot="{ errors }" rules="required|min:4" name="お名前">
-                      <input v-model="displayName" class="input" type="text" placeholder="例）山田 太郎" />
+                      <input v-model="displayName" class="material-input" type="text" required />
+                      <span class="material-highlight"></span>
+                      <span class="bar"></span>
+                      <label>お名前</label>
                       <p v-show="errors.length" class="help is-danger">{{ errors[0] }}</p>
                     </validation-provider>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label">メールアドレス</label>
-                  <div class="control">
+                  <div class="control-material">
                     <validation-provider v-slot="{ errors }" rules="required|email" name="メールアドレス">
-                      <input v-model="email" class="input" type="email" placeholder="例）aaa@example.com" />
+                      <input v-model="email" class="material-input" type="text" required />
+                      <span class="material-highlight"></span>
+                      <span class="bar"></span>
+                      <label>メールアドレス</label>
                       <p v-show="errors.length" class="help is-danger">{{ errors[0] }}</p>
                     </validation-provider>
                   </div>

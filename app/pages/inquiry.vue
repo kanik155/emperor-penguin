@@ -4,7 +4,6 @@
       <section class="section no-top-pad">
         <h1>お問合せ</h1>
         <hr />
-
         <div class="columns is-centered is-mobile">
           <div class="column is-half-desktop is-full-mobile is-full-tablet">
             <validation-observer v-slot="{ valid }">

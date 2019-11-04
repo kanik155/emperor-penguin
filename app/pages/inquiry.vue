@@ -45,9 +45,13 @@
                     </validation-provider>
                   </div>
                 </div>
-                <div class="field">
+                <div class="field is-grouped is-grouped-right">
                   <div class="control">
-                    <button class="button is-primary" :class="{ 'is-loading': busy }" :disabled="(busy, !valid)">
+                    <button
+                      class="button is-primary"
+                      :class="{ 'is-loading': isSubmitting }"
+                      :disabled="(isSubmitting, !valid)"
+                    >
                       送信
                     </button>
                   </div>
@@ -62,31 +66,27 @@
 </template>
 
 <script>
-import apiJobMixin from '@/mixins/apiJobMixin'
+import firebase from 'firebase/app'
+import 'firebase/functions'
 
 export default {
-  mixins: [apiJobMixin],
   data() {
     return {
       displayName: '',
       email: '',
-      message: ''
+      message: '',
+      isSubmitting: false
     }
   },
   methods: {
     onSubmmit() {
-      const submmitData = {
-        displayName: this.displayName,
-        email: this.email,
-        message: this.message
-      }
-      this.$store.dispatch('inquiry', submmitData)
-    },
-    jobsDone() {
-      // apiJobMixinで叩かれる
-      this.removeErrors()
-      // アカウント登録が完了したのでルートパスにリダイレクトします。
-      this.$router.replace('/')
+      const mailer = firebase.functions().httpsCallable('sendMail')
+
+      this.isSubmitting = true
+      mailer({ displayName: this.displayName, email: this.email, message: this.message }).then(() => {
+        this.$router.replace('/thanks')
+      })
+      this.isSubmitting = false
     }
   }
 }

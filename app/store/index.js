@@ -1,6 +1,3 @@
-import firebase from 'firebase/app'
-import 'firebase/functions'
-
 export const state = () => ({
   user: null,
   error: null,
@@ -66,20 +63,6 @@ export const actions = {
   logOut({ commit }) {
     this.$fireApp.auth().signOut()
     commit('setUser', null)
-  },
-  inquiry({ commit }, payload) {
-    commit('setBusy', true)
-
-    const mailer = firebase.functions().httpsCallable('sendMail')
-
-    mailer({ displayName: payload.displayName, email: payload.email, message: payload.message })
-      .then(() => {
-        commit('setBusy', false)
-      })
-      .catch((error) => {
-        commit('setBusy', false)
-        commit('setError', error)
-      })
   }
 }
 

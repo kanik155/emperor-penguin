@@ -20,7 +20,12 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <nuxt-link class="navbar-item" to="/">Mypage</nuxt-link>
-          <nuxt-link class="navbar-item" to="/settings">Settings</nuxt-link>
+          <nuxt-link
+            v-if="userid"
+            class="navbar-item"
+            :to="{ name: 'user-settings-userid', params: { userid: userid } }"
+            >Settings</nuxt-link
+          >
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">About</a>
             <div class="navbar-dropdown">
@@ -74,6 +79,9 @@ import apiJobMixin from '@/mixins/apiJobMixin'
 export default {
   mixins: [apiJobMixin],
   computed: {
+    userid() {
+      return this.$store.getters.user ? this.$store.getters.user.id : ''
+    },
     isLogin() {
       const loggedIn = this.$store.getters.loginStatus
 

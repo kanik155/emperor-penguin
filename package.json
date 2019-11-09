@@ -19,10 +19,12 @@
     "@fortawesome/vue-fontawesome": "^0.1.7",
     "@nuxtjs/bulma": "^1.2.1",
     "firebase": "^7.2.3",
+    "js-cookie": "^2.2.1",
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "vee-validate": "^3.0.11"
+    "vee-validate": "^3.0.11",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",

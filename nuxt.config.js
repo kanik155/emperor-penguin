@@ -25,7 +25,13 @@ export default {
     scss: ['@/assets/sass/variable.scss']
   },
 
-  plugins: ['@/plugins/firebase', '@/plugins/vee-validate', '@/plugins/moment', '@/plugins/uniqStr'],
+  plugins: [
+    '@/plugins/firebase',
+    '@/plugins/cookie-storage',
+    '@/plugins/vee-validate',
+    '@/plugins/moment',
+    '@/plugins/uniqStr'
+  ],
 
   buildModules: ['@nuxtjs/eslint-module'],
 
